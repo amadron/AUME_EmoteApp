@@ -30,7 +30,18 @@
         app:srcCompat="@android:drawable/ic_menu_add" />
 
 
-    <include layout="@layout/content_main"
-        android:layout_height="175dp" />
+    <include
+        layout="@layout/content_main"
+        android:layout_height="175dp"
+        android:id="@+id/include" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:text="Track Your Emotions!"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="center_vertical|center_horizontal" />
 
 </android.support.design.widget.CoordinatorLayout>
