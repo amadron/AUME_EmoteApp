@@ -13,4 +13,9 @@ public class EmoteSelector extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emote_selector);
     }
+
+    void goBack()
+    {
+        this.finish();
+    }
 }
