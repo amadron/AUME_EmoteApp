@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void openSelectorView(View v) {
         Intent intent = new Intent(this, EmoteSelector.class);
-
         startActivity(intent);
     }
 }
