@@ -12,10 +12,5 @@ public class EmoteSelector extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emote_selector);
-        /*
-        ActionBar ab = getSupportActionBar();
-        View men = (View) getLayoutInflater().inflate(R.layout.emote_selector_bar, null);
-        ab.setCustomView(men);
-        */
     }
 }
