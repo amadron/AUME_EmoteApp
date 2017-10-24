@@ -92,7 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:clickable="true"
-        android:onClick="debugTitle"
+        android:onClick="sendElement"
         app:fabSize="mini"
         app:layout_anchor="@+id/nestedScrollView2"
         app:layout_anchorGravity="bottom|center_horizontal"

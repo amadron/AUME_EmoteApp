@@ -17,8 +17,13 @@ import android.widget.Toolbar;
 
 import java.io.FileOutputStream;
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+
+import model.Data;
+import model.Entry;
 
 public class EmoteSelector extends AppCompatActivity {
 
@@ -83,7 +88,7 @@ public class EmoteSelector extends AppCompatActivity {
                 currentModeValue = progress;
                 setTextValueWithProgress(textValue,progress);
                 setSliderColorForNewValue(seekBar,progress);
-                saveString(String.valueOf(progress));
+
             }
 
             @Override
@@ -124,8 +129,14 @@ public class EmoteSelector extends AppCompatActivity {
         }
     }
 
-    public void debugTitle(View view) {
+    public void sendElement(View view) {
         Log.d("title",currentTitle);
+        int id = Data.getEntryNumbers();
+        Date dt = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        Entry entry = new Entry(id, currentTitle, currentModeValue, format.format(dt));
+        Data.addEntry(entry);
+        Log.d("EmoteSelector", Data.getEntryListJson().toString());
     }
 
     public void goBack(View view)
