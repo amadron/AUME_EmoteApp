@@ -11,14 +11,43 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import java.lang.reflect.Array;
+import java.util.LinkedList;
+import java.util.List;
+
 public class EmoteSelector extends AppCompatActivity {
+
+    private final List<Integer> colorGradien;
+    private int currentModeValue;
+
+    public EmoteSelector() {
+        currentModeValue = 5;
+        colorGradien = new LinkedList<>();
+        colorGradien.add(Color.parseColor("#ff0000"));
+        colorGradien.add(Color.parseColor("#e21506"));
+        colorGradien.add(Color.parseColor("#c62a0c"));
+        colorGradien.add(Color.parseColor("#aa3f12"));
+        colorGradien.add(Color.parseColor("#8d5418"));
+        colorGradien.add(Color.parseColor("#716a1f"));
+        colorGradien.add(Color.parseColor("#557f25"));
+        colorGradien.add(Color.parseColor("#38942b"));
+        colorGradien.add(Color.parseColor("#1ca931"));
+        colorGradien.add(Color.parseColor("#19ab32"));
+        colorGradien.add(Color.parseColor("#00bf38"));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emote_selector);
-        SeekBar seekBar = (SeekBar) findViewById(R.id.modeBaar);
-        final TextView seekBarValue = (TextView)findViewById(R.id.modeBarText);
+
+
+        final SeekBar seekBar = (SeekBar) findViewById(R.id.modeBaar);
+        final TextView textValue = (TextView)findViewById(R.id.modeBarText);
+
+
+
+        this.setTextValueWithProgress(textValue,currentModeValue);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
 
@@ -26,7 +55,11 @@ public class EmoteSelector extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress,
                                           boolean fromUser) {
                 // TODO Auto-generated method stub
-                seekBarValue.setText(String.valueOf(progress));
+
+                currentModeValue = progress;
+                setTextValueWithProgress(textValue,progress);
+                setSliderColorForNewValue(seekBar,progress);
+
             }
 
             @Override
@@ -37,9 +70,18 @@ public class EmoteSelector extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 // TODO Auto-generated method stub
-                seekBar.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
             }
         });
+    }
+
+    public void setSliderColorForNewValue(SeekBar seekBar, int progress) {
+        seekBar.getThumb().setColorFilter(colorGradien.get(progress), PorterDuff.Mode.SRC_IN);
+        seekBar.getProgressDrawable().setColorFilter(colorGradien.get(progress), PorterDuff.Mode.SRC_IN);
+    }
+
+    public void setTextValueWithProgress(TextView text, int progress) {
+        text.setText(String.valueOf(progress));
+        text.setTextColor(colorGradien.get(progress));
     }
 
     public void goBack(View view)
