@@ -1,5 +1,6 @@
 package aume.htwg.emoteapp;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.support.v7.app.ActionBar;
@@ -11,6 +12,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import java.io.FileOutputStream;
 import java.lang.reflect.Array;
 import java.util.LinkedList;
 import java.util.List;
@@ -59,7 +61,7 @@ public class EmoteSelector extends AppCompatActivity {
                 currentModeValue = progress;
                 setTextValueWithProgress(textValue,progress);
                 setSliderColorForNewValue(seekBar,progress);
-
+                saveString(String.valueOf(progress));
             }
 
             @Override
@@ -82,6 +84,21 @@ public class EmoteSelector extends AppCompatActivity {
     public void setTextValueWithProgress(TextView text, int progress) {
         text.setText(String.valueOf(progress));
         text.setTextColor(colorGradien.get(progress));
+    }
+
+    void saveString(String str)
+    {
+        FileOutputStream fout;
+        try{
+            fout = openFileOutput(MainActivity.filename, Context.MODE_PRIVATE);
+            fout.write(str.getBytes());
+            fout.close();
+            Log.v("MainActivity", "Written");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void goBack(View view)
